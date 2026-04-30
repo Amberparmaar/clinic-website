@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediCare Clinic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+
+      /* Enhanced Glassmorphism */
+      .glass {
+        background: rgba(255, 255, 255, 0.72);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      }
+
+      .glass-dark {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .hero-bg {
+        background:
+          linear-gradient(
+            135deg,
+            rgba(13, 148, 136, 0.85),
+            rgba(15, 23, 42, 0.75)
+          ),
+          url("https://source.unsplash.com/random/1920x1080/?modern-clinic")
+            center/cover no-repeat;
+      }
+
+      .service-card {
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .service-card:hover {
+        transform: translateY(-15px) scale(1.03);
+        box-shadow: 0 25px 60px -15px rgba(45, 212, 191, 0.25);
+      }
+
+      .nav-link {
+        position: relative;
+        transition: color 0.3s;
+      }
+
+      .nav-link:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background: linear-gradient(to right, #14b8a6, #22d3ee);
+        transition: width 0.4s ease;
+      }
+
+      .nav-link:hover:after {
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-50">
+    <!-- Header (Same as index.html) -->
+    <header class="sticky top-0 z-50 glass border-b border-white/40">
+      <div
+        class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between"
+      >
+        <div class="flex items-center gap-3">
+          <div
+            class="w-11 h-11 bg-gradient-to-br from-teal-500 to-cyan-400 rounded-2xl flex items-center justify-center shadow-inner"
+          >
+            <i class="fa-solid fa-heart-pulse text-white text-3xl"></i>
+          </div>
+          <h1
+            class="text-3xl font-bold bg-gradient-to-r from-teal-700 to-cyan-600 bg-clip-text text-transparent"
+          >
+            MediCare
+          </h1>
+        </div>
+
+        <nav
+          class="hidden md:flex items-center gap-10 text-sm font-medium text-gray-700"
+        >
+          <a href="index.html" class="nav-link hover:text-teal-600">Home</a>
+          <a href="about.html" class="nav-link hover:text-teal-600">About</a>
+          <a href="services.html" class="nav-link hover:text-teal-600"
+            >Services</a
+          >
+          <a href="contact.html" class="nav-link hover:text-teal-600"
+            >Contact</a
+          >
+        </nav>
+
+        <a
+          href="#"
+          onclick="showBookingModal()"
+          class="hidden md:block bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white px-8 py-3.5 rounded-3xl font-semibold shadow-lg shadow-teal-500/40 transition-all"
+        >
+          Book Appointment
+        </a>
+
+        <button
+          id="hamburgerBtn"
+          class="md:hidden text-3xl text-gray-700 focus:outline-none"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div
+        id="mobileMenu"
+        class="hidden md:hidden glass border-t border-white/30"
+      >
+        <div
+          class="flex flex-col px-6 py-8 space-y-6 text-base font-medium text-gray-700"
+        >
+          <a href="index.html" class="hover:text-teal-600 transition">Home</a>
+          <a href="about.html" class="hover:text-teal-600 transition">About</a>
+          <a href="services.html" class="hover:text-teal-600 transition"
+            >Services</a
+          >
+          <a href="contact.html" class="hover:text-teal-600 transition"
+            >Contact</a
+          >
+
+          <div class="pt-6 border-t border-white/30">
+            <a
+              href="#"
+              onclick="
+                showBookingModal();
+                toggleMobileMenu();
+              "
+              class="block bg-gradient-to-r from-teal-500 to-cyan-500 text-white py-4 text-center rounded-3xl font-semibold"
+            >
+              Book Appointment
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section
+      class="container-xxl bg-gradient-to-r from-teal-600 to-blue-600 text-white py-24"
+    >
+      <div class="max-w-7xl mx-auto px-6 text-center">
+        <h1 class="text-5xl font-bold mb-6">About MediCare Clinic</h1>
+        <p class="text-xl max-w-2xl mx-auto">
+          Providing exceptional healthcare with compassion, expertise, and
+          modern technology since 2018.
+        </p>
+      </div>
+    </section>
+
+    <!-- Clinic Story -->
+    <section class="container-xxl py-20">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <div>
+            <h2 class="text-4xl font-bold mb-6">Our Story</h2>
+            <p class="text-lg text-gray-600 mb-6">
+              Founded in 2018, MediCare Clinic was born from a vision to create
+              a healthcare facility that combines medical excellence with
+              genuine care and comfort.
+            </p>
+            <p class="text-lg text-gray-600">
+              Today, we serve thousands of patients across Karachi with a team
+              of highly qualified specialists and state-of-the-art medical
+              equipment.
+            </p>
+          </div>
+          <div class="rounded-3xl overflow-hidden shadow-2xl">
+            <img
+              src="./assets/clinic.jfif"
+              alt="Clinic Interior"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Doctor Profile -->
+    <section class="container-xxl py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center mb-12">
+          Meet Our Lead Doctor
+        </h2>
+        <div
+          class="max-w-4xl mx-auto glass rounded-3xl p-10 flex flex-col md:flex-row gap-10 items-center"
+        >
+          <img
+            src="./assets/lady-doctor.jfif"
+            alt="Dr. Ayesha Khan"
+            class="w-64 h-64 rounded-3xl object-cover shadow-lg"
+          />
+          <div>
+            <h3 class="text-3xl font-semibold mb-2">Dr. Ayesha Khan</h3>
+            <p class="text-teal-600 font-medium mb-4">
+              MBBS, FCPS (Internal Medicine) • 12+ Years Experience
+            </p>
+            <p class="text-gray-600 mb-6">
+              With over 12 years of experience in internal medicine and
+              preventive healthcare, Dr. Ayesha Khan leads our medical team with
+              dedication and compassion.
+            </p>
+            <div class="grid grid-cols-2 gap-6 text-sm">
+              <div>
+                <strong>Specialization:</strong> Internal Medicine & Cardiology
+              </div>
+              <div><strong>Education:</strong> Dow Medical College</div>
+              <div><strong>Patients Treated:</strong> 15,000+</div>
+              <div><strong>Languages:</strong> English, Urdu, Sindhi</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission & Vision + Stats -->
+    <section class="container-xxl py-20 bg-teal-50">
+      <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12">
+        <div class="space-y-10">
+          <div>
+            <h3 class="text-2xl font-semibold mb-4 flex items-center gap-3">
+              <span class="text-teal-600">🎯</span> Our Mission
+            </h3>
+            <p class="text-gray-600">
+              To provide accessible, high-quality, and compassionate healthcare
+              that improves the lives of individuals and families in our
+              community.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-2xl font-semibold mb-4 flex items-center gap-3">
+              <span class="text-teal-600">🌟</span> Our Vision
+            </h3>
+            <p class="text-gray-600">
+              To be the most trusted healthcare provider in Pakistan, known for
+              clinical excellence and patient-centered care.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8">
+          <div class="bg-white rounded-3xl p-8 text-center shadow">
+            <h4 class="text-5xl font-bold text-teal-600 mb-2">15,000+</h4>
+            <p class="text-gray-600">Happy Patients</p>
+          </div>
+          <div class="bg-white rounded-3xl p-8 text-center shadow">
+            <h4 class="text-5xl font-bold text-teal-600 mb-2">8</h4>
+            <p class="text-gray-600">Years of Excellence</p>
+          </div>
+          <div class="bg-white rounded-3xl p-8 text-center shadow">
+            <h4 class="text-5xl font-bold text-teal-600 mb-2">25</h4>
+            <p class="text-gray-600">Expert Doctors</p>
+          </div>
+          <div class="bg-white rounded-3xl p-8 text-center shadow">
+            <h4 class="text-5xl font-bold text-teal-600 mb-2">12</h4>
+            <p class="text-gray-600">Specialties</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="container-xxl bg-gray-900 text-gray-300 py-16">
+      <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
+        <div>
+          <div class="flex items-center gap-3 text-white mb-4">
+            <i class="fa-solid fa-heart-pulse text-3xl text-teal-500"></i>
+            <h3 class="text-2xl font-bold">MediCare</h3>
+          </div>
+          <p class="text-sm">
+            Compassionate healthcare for you and your family.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-4">Quick Links</h4>
+          <div class="space-y-2 text-sm">
+            <a href="index.html" class="block hover:text-white">Home</a>
+            <a href="about.html" class="block hover:text-white">About Us</a>
+            <a href="services.html" class="block hover:text-white">Services</a>
+            <a href="contact.html" class="block hover:text-white">Contact</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-4">Contact Info</h4>
+          <p class="text-sm">+92 300 1234567</p>
+          <p class="text-sm">info@medicareclinic.pk</p>
+          <p class="text-sm">Clifton, Karachi, Pakistan</p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-4">Working Hours</h4>
+          <p class="text-sm">Mon - Sat: 9:00 AM - 8:00 PM</p>
+          <p class="text-sm">Sunday: Emergency Only</p>
+        </div>
+      </div>
+      <div class="text-center text-xs mt-12 text-gray-500">
+        © 2026 MediCare Clinic. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div
+      id="bookingModal"
+      class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50 backdrop-blur-sm"
+    >
+      <div class="glass rounded-3xl max-w-lg w-full mx-4 overflow-hidden">
+        <div class="p-10">
+          <div class="flex justify-between items-center mb-8">
+            <h3 class="text-3xl font-semibold text-gray-900">
+              Book Appointment
+            </h3>
+            <button
+              onclick="hideBookingModal()"
+              class="text-4xl text-gray-400 hover:text-gray-600 transition"
+            >
+              ×
+            </button>
+          </div>
+
+          <form
+            id="bookingForm"
+            onsubmit="handleBooking(event)"
+            class="space-y-6"
+          >
+            <input
+              type="text"
+              id="name"
+              placeholder="Full Name"
+              required
+              class="w-full px-6 py-4 bg-white/70 border border-white/60 rounded-2xl focus:outline-none focus:border-teal-400 placeholder-gray-500"
+            />
+
+            <input
+              type="tel"
+              id="phone"
+              placeholder="Phone Number"
+              required
+              class="w-full px-6 py-4 bg-white/70 border border-white/60 rounded-2xl focus:outline-none focus:border-teal-400 placeholder-gray-500"
+            />
+
+            <input
+              type="email"
+              id="email"
+              placeholder="Email Address"
+              class="w-full px-6 py-4 bg-white/70 border border-white/60 rounded-2xl focus:outline-none focus:border-teal-400 placeholder-gray-500"
+            />
+
+            <select
+              id="service"
+              class="w-full px-6 py-4 bg-white/70 border border-white/60 rounded-2xl focus:outline-none focus:border-teal-400 text-gray-700"
+            >
+              <option value="">Select Service</option>
+              <option value="Dental">Dental Care</option>
+              <option value="Skin">Skin & Aesthetics</option>
+              <option value="General">General Checkup</option>
+            </select>
+
+            <input
+              type="date"
+              id="date"
+              class="w-full px-6 py-4 bg-white/70 border border-white/60 rounded-2xl focus:outline-none focus:border-teal-400"
+            />
+
+            <textarea
+              id="message"
+              rows="4"
+              placeholder="Additional notes..."
+              class="w-full px-6 py-4 bg-white/70 border border-white/60 rounded-3xl focus:outline-none focus:border-teal-400 placeholder-gray-500"
+            ></textarea>
+
+            <button
+              type="submit"
+              class="w-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white py-4 rounded-3xl font-semibold text-lg transition-all shadow-lg"
+            >
+              Confirm Appointment
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="./index.js"></script>
+  </body>
+</html>

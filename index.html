@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediCare Clinic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+
+      /* Enhanced Glassmorphism */
+      .glass {
+        background: rgba(255, 255, 255, 0.72);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      }
+
+      .glass-dark {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .hero-bg {
+        background:
+          linear-gradient(
+            135deg,
+            rgba(13, 148, 136, 0.85),
+            rgba(15, 23, 42, 0.75)
+          ),
+          url("./assets/hero-bg.jfif") center/cover no-repeat;
+      }
+
+      .service-card {
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .service-card:hover {
+        transform: translateY(-15px) scale(1.03);
+        box-shadow: 0 25px 60px -15px rgba(45, 212, 191, 0.25);
+      }
+
+      .nav-link {
+        position: relative;
+        transition: color 0.3s;
+      }
+
+      .nav-link:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background: linear-gradient(to right, #14b8a6, #22d3ee);
+        transition: width 0.4s ease;
+      }
+
+      .nav-link:hover:after {
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header
+      class="container-xxl mx-auto sticky top-0 z-50 glass border-b border-white/30"
+    >
+      <div
+        class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between"
+      >
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 bg-gradient-to-br from-teal-500 to-cyan-400 rounded-2xl flex items-center justify-center"
+          >
+            <i class="fa-solid fa-heart-pulse text-white text-2xl"></i>
+          </div>
+          <h1
+            class="text-2xl font-bold bg-gradient-to-r from-teal-600 to-cyan-500 bg-clip-text text-transparent"
+          >
+            MediCare
+          </h1>
+        </div>
+
+        <nav
+          class="hidden md:flex items-center gap-9 text-sm font-medium text-gray-700"
+        >
+          <a href="index.html" class="nav-link hover:text-teal-600">Home</a>
+          <a href="about.html" class="nav-link hover:text-teal-600">About</a>
+          <a href="services.html" class="nav-link hover:text-teal-600"
+            >Services</a
+          >
+          <a href="contact.html" class="nav-link hover:text-teal-600"
+            >Contact</a
+          >
+        </nav>
+
+        <button
+          onclick="toggleMobileMenu()"
+          class="md:hidden text-3xl text-gray-700"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <a
+          href="#"
+          onclick="showBookingModal()"
+          class="hidden md:block bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white px-7 py-3 rounded-3xl font-semibold shadow-lg shadow-teal-500/30 transition-all active:scale-95"
+        >
+          Book Appointment
+        </a>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div
+        id="mobileMenu"
+        class="hidden md:hidden glass border-t border-white/30"
+      >
+        <div class="flex flex-col px-6 py-6 space-y-5 text-base font-medium">
+          <a href="index.html" class="hover:text-teal-600">Home</a>
+          <a href="about.html" class="hover:text-teal-600">About</a>
+          <a href="services.html" class="hover:text-teal-600">Services</a>
+          <a href="contact.html" class="hover:text-teal-600">Contact</a>
+          <a
+            href="#"
+            onclick="showBookingModal()"
+            class="bg-gradient-to-r from-teal-500 to-cyan-500 text-white py-4 text-center rounded-3xl font-semibold"
+            >Book Appointment</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section
+      class="container-xxl mx-auto hero-bg h-screen flex items-center text-white relative overflow-hidden"
+    >
+      <div class="absolute inset-0 bg-black/20"></div>
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="max-w-2xl">
+          <h2
+            class="text-6xl md:text-7xl font-bold leading-tight mb-6 tracking-tight"
+          >
+            Your Health,<br />Our Priority
+          </h2>
+          <p class="text-xl md:text-2xl text-white/90 mb-10">
+            Experience world-class healthcare with compassion and cutting-edge
+            technology.
+          </p>
+          <div class="flex flex-wrap gap-5">
+            <a
+              href="#"
+              onclick="showBookingModal()"
+              class="bg-white text-teal-700 hover:bg-teal-50 px-9 py-4 rounded-3xl font-semibold text-lg transition-all shadow-xl"
+            >
+              Book Appointment
+            </a>
+            <a
+              href="services.html"
+              class="border border-white/70 hover:bg-white/10 px-9 py-4 rounded-3xl font-semibold text-lg transition-all"
+            >
+              Explore Services
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Preview -->
+    <section class="container-xxl py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold mb-3">Our Services</h2>
+          <p class="text-gray-600 max-w-lg mx-auto">
+            Comprehensive healthcare solutions tailored to your needs
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Service Cards -->
+          <div
+            class="glass service-card border border-white/50 rounded-3xl p-9 hover:border-teal-200"
+          >
+            <div
+              class="w-20 h-20 bg-gradient-to-br from-teal-100 to-cyan-100 text-teal-600 rounded-3xl flex items-center justify-center text-5xl mb-8 transition-transform group-hover:scale-110"
+            >
+              🦷
+            </div>
+            <h3 class="text-2xl font-semibold mb-4 text-gray-900">
+              Dental Care
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Advanced dental treatments with experienced specialists in a
+              comfortable environment.
+            </p>
+          </div>
+
+          <div
+            class="glass service-card border border-white/50 rounded-3xl p-9 hover:border-teal-200"
+          >
+            <div
+              class="w-20 h-20 bg-gradient-to-br from-teal-100 to-cyan-100 text-teal-600 rounded-3xl flex items-center justify-center text-5xl mb-8 transition-transform group-hover:scale-110"
+            >
+              👩‍⚕️
+            </div>
+            <h3 class="text-2xl font-semibold mb-4 text-gray-900">Skin Care</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Advanced skin treatments with experienced specialists in a
+              comfortable environment.
+            </p>
+          </div>
+
+          <div
+            class="glass service-card border border-white/50 rounded-3xl p-9 hover:border-teal-200"
+          >
+            <div
+              class="w-20 h-20 bg-gradient-to-br from-teal-100 to-cyan-100 text-teal-600 rounded-3xl flex items-center justify-center text-5xl mb-8 transition-transform group-hover:scale-110"
+            >
+              💉
+            </div>
+            <h3 class="text-2xl font-semibold mb-4 text-gray-900">
+              Aesthetics Care
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Advanced aesthetic treatments with experienced specialists in a
+              comfortable environment.
+            </p>
+          </div>
+
+          <div
+            class="glass service-card border border-white/50 rounded-3xl p-9 hover:border-teal-200"
+          >
+            <div
+              class="w-20 h-20 bg-gradient-to-br from-teal-100 to-cyan-100 text-teal-600 rounded-3xl flex items-center justify-center text-5xl mb-8 transition-transform group-hover:scale-110"
+            >
+              🩺
+            </div>
+            <h3 class="text-2xl font-semibold mb-4 text-gray-900">
+              General Consultation
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Comprehensive healthcare services delivered by experienced
+              professionals in a safe and caring environment
+            </p>
+          </div>
+
+          <div
+            class="glass service-card border border-white/50 rounded-3xl p-9 hover:border-teal-200"
+          >
+            <div
+              class="w-20 h-20 bg-gradient-to-br from-teal-100 to-cyan-100 text-teal-600 rounded-3xl flex items-center justify-center text-5xl mb-8 transition-transform group-hover:scale-110"
+            >
+              🚼
+            </div>
+            <h3 class="text-2xl font-semibold mb-4 text-gray-900">
+              Child Care (Pediatrics)
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Specialized care for children provided by skilled pediatricians in
+              a safe and caring environment.
+            </p>
+          </div>
+          <div
+            class="glass service-card border border-white/50 rounded-3xl p-9 hover:border-teal-200"
+          >
+            <div
+              class="w-20 h-20 bg-gradient-to-br from-teal-100 to-cyan-100 text-teal-600 rounded-3xl flex items-center justify-center text-5xl mb-8 transition-transform group-hover:scale-110"
+            >
+              🩸
+            </div>
+            <h3 class="text-2xl font-semibold mb-4 text-gray-900">
+              Diagnostic Services (Lab Tests)
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Accurate and reliable diagnostic testing using modern technology
+              in a professional setting.
+            </p>
+          </div>
+        </div>
+
+        <div class="text-center mt-12">
+          <a
+            href="services.html"
+            class="text-teal-600 hover:text-teal-700 font-medium flex items-center gap-2 justify-center"
+          >
+            View All Services <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="container-xxl py-20 bg-teal-50">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <div>
+            <h2 class="text-4xl font-bold mb-6">Why Patients Trust MediCare</h2>
+            <div class="space-y-8">
+              <div class="flex gap-6">
+                <div class="text-teal-600 text-4xl">01</div>
+                <div>
+                  <h4 class="font-semibold text-xl mb-2">
+                    Expert Medical Team
+                  </h4>
+                  <p class="text-gray-600">
+                    Highly qualified doctors with years of specialized
+                    experience.
+                  </p>
+                </div>
+              </div>
+              <div class="flex gap-6">
+                <div class="text-teal-600 text-4xl">02</div>
+                <div>
+                  <h4 class="font-semibold text-xl mb-2">Modern Technology</h4>
+                  <p class="text-gray-600">
+                    State-of-the-art diagnostic and treatment equipment.
+                  </p>
+                </div>
+              </div>
+              <div class="flex gap-6">
+                <div class="text-teal-600 text-4xl">03</div>
+                <div>
+                  <h4 class="font-semibold text-xl mb-2">
+                    Patient-Centric Care
+                  </h4>
+                  <p class="text-gray-600">
+                    Compassionate care in a comfortable, welcoming environment.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white rounded-3xl p-8 shadow-xl">
+            <img
+              src="./assets/doctor.jpg"
+              alt="Doctor"
+              class="rounded-2xl w-50 h-50 mx-auto"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="container-xxl py-20">
+      <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center mb-12">
+          What Our Patients Say
+        </h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="glass p-8 rounded-3xl">
+            <p class="italic text-gray-700 mb-6">
+              "The care I received was exceptional. The doctors are not only
+              skilled but genuinely caring."
+            </p>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-gray-300 rounded-full">
+                <img
+                  class="w-12 h-12 rounded-full"
+                  src="./assets/client3.jfif"
+                  alt=""
+                />
+              </div>
+              <div>
+                <p class="font-semibold">Sarah Ahmed</p>
+                <p class="text-sm text-gray-500">Karachi</p>
+              </div>
+            </div>
+          </div>
+          <div class="glass p-8 rounded-3xl">
+            <p class="italic text-gray-700 mb-6">
+              "The care I received was exceptional. The doctors are not only
+              skilled but genuinely caring."
+            </p>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-gray-300 rounded-full">
+                <img
+                  class="w-12 h-12 rounded-full"
+                  src="./assets/client1.jpg"
+                  alt=""
+                />
+              </div>
+              <div>
+                <p class="font-semibold">zahida</p>
+                <p class="text-sm text-gray-500">Karachi</p>
+              </div>
+            </div>
+          </div>
+          <div class="glass p-8 rounded-3xl">
+            <p class="italic text-gray-700 mb-6">
+              "The care I received was exceptional. The doctors are not only
+              skilled but genuinely caring."
+            </p>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-gray-300 rounded-full">
+                <img
+                  class="w-12 h-12 rounded-full"
+                  src="./assets/client2.jpg"
+                  alt=""
+                />
+              </div>
+              <div>
+                <p class="font-semibold">Shoukat</p>
+                <p class="text-sm text-gray-500">Karachi</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="container-xxl bg-gray-900 text-gray-300 py-16">
+      <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
+        <div>
+          <div class="flex items-center gap-3 text-white mb-4">
+            <i class="fa-solid fa-heart-pulse text-3xl text-teal-500"></i>
+            <h3 class="text-2xl font-bold">MediCare</h3>
+          </div>
+          <p class="text-sm">
+            Compassionate healthcare for you and your family.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-4">Quick Links</h4>
+          <div class="space-y-2 text-sm">
+            <a href="about.html" class="block hover:text-white">About Us</a>
+            <a href="services.html" class="block hover:text-white">Services</a>
+            <a href="contact.html" class="block hover:text-white">Contact</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-4">Contact</h4>
+          <p class="text-sm">+92 300 1234567</p>
+          <p class="text-sm">info@medicareclinic.pk</p>
+          <p class="text-sm">Karachi, Pakistan</p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-white mb-4">Follow Us</h4>
+          <div class="flex gap-4 text-2xl">
+            <i
+              class="fa-brands fa-facebook hover:text-teal-400 cursor-pointer"
+            ></i>
+            <i
+              class="fa-brands fa-instagram hover:text-teal-400 cursor-pointer"
+            ></i>
+            <i
+              class="fa-brands fa-whatsapp hover:text-teal-400 cursor-pointer"
+            ></i>
+          </div>
+        </div>
+      </div>
+      <div class="text-center text-xs mt-12 text-gray-500">
+        © 2026 MediCare Clinic. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div
+      id="bookingModal"
+      class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50 backdrop-blur-sm"
+    >
+      <div class="glass rounded-3xl max-w-lg w-full mx-4 overflow-hidden">
+        <div class="p-10">
+          <div class="flex justify-between items-center mb-8">
+            <h3 class="text-3xl font-semibold text-gray-900">
+              Book Appointment
+            </h3>
+            <button
+              onclick="hideBookingModal()"
+              class="text-4xl text-gray-400 hover:text-gray-600 transition"
+            >
+              ×
+            </button>
+          </div>
+
+          <form
+            id="bookingForm"
+            onsubmit="handleBooking(event)"
+            class="space-y-6"
+          >
+            <input
+              type="text"
+              id="name"
+              placeholder="Full Name"
+              required
+              class="w-full px-6 py-4 bg-white/70 border border-white/60 rounded-2xl focus:outline-none focus:border-teal-400 placeholder-gray-500"
+            />
+
+            <input
+              type="tel"
+              id="phone"
+              placeholder="Phone Number"
+              required
+              class="w-full px-6 py-4 bg-white/70 border border-white/60 rounded-2xl focus:outline-none focus:border-teal-400 placeholder-gray-500"
+            />
+
+            <input
+              type="email"
+              id="email"
+              placeholder="Email Address"
+              class="w-full px-6 py-4 bg-white/70 border border-white/60 rounded-2xl focus:outline-none focus:border-teal-400 placeholder-gray-500"
+            />
+
+            <select
+              id="service"
+              class="w-full px-6 py-4 bg-white/70 border border-white/60 rounded-2xl focus:outline-none focus:border-teal-400 text-gray-700"
+            >
+              <option value="">Select Service</option>
+              <option value="Dental">Dental Care</option>
+              <option value="Skin">Skin & Aesthetics</option>
+              <option value="General">General Checkup</option>
+            </select>
+
+            <input
+              type="date"
+              id="date"
+              class="w-full px-6 py-4 bg-white/70 border border-white/60 rounded-2xl focus:outline-none focus:border-teal-400"
+            />
+
+            <textarea
+              id="message"
+              rows="4"
+              placeholder="Additional notes..."
+              class="w-full px-6 py-4 bg-white/70 border border-white/60 rounded-3xl focus:outline-none focus:border-teal-400 placeholder-gray-500"
+            ></textarea>
+
+            <button
+              type="submit"
+              class="w-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white py-4 rounded-3xl font-semibold text-lg transition-all shadow-lg"
+            >
+              Confirm Appointment
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+
+    <script src="./index.js"></script>
+  </body>
+</html>
