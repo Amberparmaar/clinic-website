@@ -11,6 +11,7 @@ function toggleMobileMenu() {
   menu.classList.toggle("hidden");
 }
 
+
 function showBookingModal() {
   document.getElementById("bookingModal").classList.remove("hidden");
   document.getElementById("bookingModal").classList.add("flex");
